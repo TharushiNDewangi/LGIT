@@ -1,4 +1,7 @@
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:learn_git/services/storage_services.dart';
 
 /**
  * created by IT19123196(K.H.T.N Dewangi)
@@ -51,4 +54,69 @@ class FireStoreService {
       print(e.toString());
     }
   }
+
+  Future<String> updateUserData(
+    String uid, {
+    required String username,
+    required String bio,
+  }) async {
+    String res = "Error";
+    try {
+      await _firestore.collection('users').doc(uid).update({
+        'username': username,
+        'bio': bio,
+      });
+    } catch (err) {
+      return err.toString();
+    }
+    return res;
+  }
+
+  Future<String> updateProfile(
+    String uid, {
+    required Uint8List file,
+  }) async {
+    String photoUrl =
+        await StorageServices().uploadImgToStorage('profilePics', file);
+    String res = "Error";
+    try {
+      await _firestore
+          .collection('users')
+          .doc(uid)
+          .update({'photoUrl': photoUrl});
+    } catch (err) {
+      return err.toString();
+    }
+    return res;
+  }
+
+// Future deleteuser() {
+//     return userCollection.document(uid).delete();
+//   }
+  Future<String> deleteProfile(
+    String uid,
+    //{
+    //required String email,
+    // }
+  ) async {
+    String res = "Error";
+    try {
+      await _firestore.collection('users').doc(uid).delete();
+    } catch (err) {
+      return err.toString();
+    }
+    return res;
+  }
+
+  // Future<String> updateUserData(
+  //   //String uid,
+  //   //String email,
+  //   String username,
+  //   String bio,
+  // ) async {
+  //   await _firestore.collection('users').doc(uid).update({
+  //     'username': username,
+  //     'bio': bio,
+  //   });
+  // }
 }

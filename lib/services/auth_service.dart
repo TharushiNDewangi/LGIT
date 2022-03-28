@@ -125,4 +125,20 @@ class AuthService {
   Future<void> signOut() async {
     await _auth.signOut();
   }
+  // Future deleteUser(String email, String password) async {
+  //   try {
+  //      User cUser = _auth.currentUser!;
+
+  //     // AuthCredential credentials =
+  //     //     EmailAuthProvider.getCredential(email: email, password: password);
+  //     print(cUser);
+  //     //AuthResult result = await cUser.reauthenticateWithCredential(credentials);
+  //     await DatabaseService(uid: result.user.uid).deleteuser(); // called from database class
+  //     await result.user.delete();
+  //     return true;
+  //   } catch (e) {
+  //     print(e.toString());
+  //     return null;
+  //   }
+  // }
 }
