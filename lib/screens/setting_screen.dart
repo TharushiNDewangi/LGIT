@@ -252,7 +252,7 @@ class _SettingScreenState extends State<SettingScreen> {
               height: 10,
             ),
             notificationTab("Enable Notification", false),
-            notificationTab("Enable New Courses", false),
+            notificationTab("Enable Light Mode", false),
             notificationTab("Enable To Use As Private", false),
             const SizedBox(
               height: 50,

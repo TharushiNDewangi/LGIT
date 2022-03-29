@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:learn_git/providers/user_provider.dart';
 import 'package:learn_git/screens/bottom_bar.dart';
 import 'package:learn_git/screens/login_screen.dart';
+import 'package:learn_git/screens/splash.dart';
 import 'package:learn_git/utill/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -69,7 +70,7 @@ class MyApp extends StatelessWidget {
               );
             }
 
-            return const LoginScreen();
+            return const Splash();
           },
         ),
       ),
