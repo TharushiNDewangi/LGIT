@@ -81,7 +81,7 @@ class _SettingScreenState extends State<SettingScreen> {
   changePassword() async {
     try {
       print('DEWWWWWWWWWWWWWWWWWW');
-      await currentUser!.updatePassword(newPassword);
+      await currentUser!.updatePassword(newPasswordController.text);
       FirebaseAuth.instance.signOut();
       Navigator.pushReplacement(
         context,
@@ -361,43 +361,73 @@ class _SettingScreenState extends State<SettingScreen> {
                   key: _formKey,
                   child: ListView(
                     children: [
+                      // TextFieldInput(
+                      //   hint: 'Enter Your Password',
+                      //   textType: TextInputType.text,
+                      //   textController: _passwordController,
+                      //   isPass: true,
+                      // ),
+                      // const SizedBox(
+                      //   height: 24,
+                      // ),
+                      // TextFieldInput(
+                      //   hint: 'Enter Your Password Again',
+                      //   textType: TextInputType.text,
+                      //   textController: _bioController,
+                      // ),
+                      //password field
                       TextFormField(
-                        autofocus: false,
-                        obscureText: true,
-                        decoration: const InputDecoration(
-                          labelText: 'Enter Your New Password: ',
-                          hintText: 'Enter New Password',
-                          labelStyle: TextStyle(fontSize: 20.0),
-                          border: OutlineInputBorder(),
-                          errorStyle:
-                              TextStyle(color: Colors.redAccent, fontSize: 15),
-                        ),
-                        controller: newPasswordController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please Enter Password';
-                          }
-                          return null;
-                        },
+                          autofocus: false,
+                          controller: newPasswordController,
+                          obscureText: true,
+                          validator: (value) {
+                            RegExp regex = new RegExp(r'^.{6,}$');
+                            if (value!.isEmpty) {
+                              return ("Password is required for login");
+                            }
+                            if (!regex.hasMatch(value)) {
+                              return ("Enter Valid Password(Min. 6 Character)");
+                            }
+                          },
+                          textInputAction: TextInputAction.next,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.vpn_key),
+                            contentPadding: const EdgeInsets.all(8),
+                            hintText: "Password",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          )),
+                      const SizedBox(
+                        height: 24,
                       ),
+                      //confirm password field
                       TextFormField(
-                        autofocus: false,
-                        obscureText: true,
-                        decoration: const InputDecoration(
-                          labelText: 'Enter Your Password Again: ',
-                          hintText: 'Enter Your Password Again',
-                          labelStyle: TextStyle(fontSize: 20.0),
-                          border: OutlineInputBorder(),
-                          errorStyle:
-                              TextStyle(color: Colors.redAccent, fontSize: 15),
-                        ),
-                        controller: confirmNewPasswordController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please Enter Password';
-                          }
-                          return null;
-                        },
+                          autofocus: false,
+                          controller: confirmNewPasswordController,
+                          obscureText: true,
+                          validator: (value) {
+                            if (confirmNewPasswordController.text !=
+                                newPasswordController.text) {
+                              return "Password don't match";
+                            }
+                            return null;
+                          },
+                          onSaved: (value) {
+                            confirmNewPasswordController.text = value!;
+                          },
+                          textInputAction: TextInputAction.done,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.vpn_key),
+                            contentPadding: const EdgeInsets.all(8),
+                            hintText: "Confirm Password",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          )),
+
+                      const SizedBox(
+                        height: 24,
                       ),
                       ElevatedButton(
                         onPressed: () {

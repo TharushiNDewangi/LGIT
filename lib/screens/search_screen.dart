@@ -15,6 +15,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController searchController = TextEditingController();
+  bool isShowUsers = false;
 
   @override
   void dispose() {
@@ -33,56 +34,103 @@ class _SearchScreenState extends State<SearchScreen> {
               decoration:
                   const InputDecoration(labelText: 'Search for a user...'),
               onFieldSubmitted: (String _) {
+                setState(() {
+                  isShowUsers = true;
+                });
                 // ignore: avoid_print
                 print(searchController.text);
               },
             ),
           ),
         ),
-        body: FutureBuilder(
-          future: FirebaseFirestore.instance
-              .collection('users')
-              .where(
-                'username',
-                isGreaterThanOrEqualTo: searchController.text,
+        body: isShowUsers
+            ? FutureBuilder(
+                future: FirebaseFirestore.instance
+                    .collection('users')
+                    .where(
+                      'username',
+                      isGreaterThanOrEqualTo: searchController.text,
+                    )
+                    .get(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return ListView.builder(
+                    //Learn From Tutorial (itemCount-get length)
+                    //username and pro pic avatar display as list and
+                    //click it and navigate its profile (user profile)
+                    //with username
+                    itemCount: (snapshot.data! as dynamic).docs.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => ProfileScreen(
+                              uid: (snapshot.data! as dynamic).docs[index]
+                                  ['uid'],
+                            ),
+                          ),
+                        ),
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: NetworkImage(
+                              (snapshot.data! as dynamic).docs[index]
+                                  ['photoUrl'],
+                            ),
+                            radius: 16,
+                          ),
+                          title: Text(
+                            (snapshot.data! as dynamic).docs[index]['username'],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
               )
-              .get(),
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            return ListView.builder(
-              //Learn From Tutorial (itemCount-get length)
-              //username and pro pic avatar display as list and
-              //click it and navigate its profile (user profile)
-              //with username
-              itemCount: (snapshot.data! as dynamic).docs.length,
-              itemBuilder: (context, index) {
-                return InkWell(
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ProfileScreen(
-                        uid: (snapshot.data! as dynamic).docs[index]['uid'],
-                      ),
-                    ),
-                  ),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: NetworkImage(
-                        (snapshot.data! as dynamic).docs[index]['photoUrl'],
-                      ),
-                      radius: 16,
-                    ),
-                    title: Text(
-                      (snapshot.data! as dynamic).docs[index]['username'],
-                    ),
-                  ),
-                );
-              },
-            );
-          },
-        ));
+            : FutureBuilder(
+                future: FirebaseFirestore.instance.collection('users').get(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return ListView.builder(
+                    //Learn From Tutorial (itemCount-get length)
+                    //username and pro pic avatar display as list and
+                    //click it and navigate its profile (user profile)
+                    //with username
+                    itemCount: (snapshot.data! as dynamic).docs.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => ProfileScreen(
+                              uid: (snapshot.data! as dynamic).docs[index]
+                                  ['uid'],
+                            ),
+                          ),
+                        ),
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: NetworkImage(
+                              (snapshot.data! as dynamic).docs[index]
+                                  ['photoUrl'],
+                            ),
+                            radius: 16,
+                          ),
+                          title: Text(
+                            (snapshot.data! as dynamic).docs[index]['username'],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ));
   }
 }

@@ -218,9 +218,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       return ("Enter Valid Password(Min. 6 Character)");
                     }
                   },
-                  onSaved: (value) {
-                    _usernameController.text = value!;
-                  },
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.vpn_key),
