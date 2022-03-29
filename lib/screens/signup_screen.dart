@@ -26,6 +26,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _bioController = TextEditingController();
+  final TextEditingController _confirmPasswordEditingController =
+      TextEditingController();
   /** From Tutorial 
    * that Loading variable this pop up when sign up correct*/
   bool _isLoading = false;
@@ -58,7 +60,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       });
       // Navigate to login
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const BottomBar()),
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
       );
     } else {
       setState(() {
@@ -96,32 +98,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: Container(),
                 flex: 2,
               ),
-              // SvgPicture.asset(
-              //   'assets/github.svg',
-              //   color: primaryColor,
-              //   height: 64,
-              // ),
-              // const SizedBox(
-              //   height: 64,
-              // ),
-              // Stack(
-              //   children: [
-              //     const CircleAvatar(
-              //       radius: 64,
-              //       backgroundImage:
-              //           NetworkImage('https://i.stack.imgur.com/l60Hf.png'),
-              //       backgroundColor: Colors.red,
-              //     ),
-              //     Positioned(
-              //       bottom: -10,
-              //       left: 80,
-              //       child: IconButton(
-              //         onPressed: () {},
-              //         icon: const Icon(Icons.add_a_photo),
-              //       ),
-              //     )
-              //   ],
-              // ),
+
               /**From Tutorial 
                * check image != null then we use Uint8List it access memory image
                * then will pass image and it should bn not null
@@ -154,44 +131,160 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(
                 height: 24,
               ),
-              TextFieldInput(
-                hint: 'Enter Your User Name',
-                textType: TextInputType.text,
-                textController: _usernameController,
-              ),
+              TextFormField(
+                  autofocus: false,
+                  controller: _usernameController,
+                  keyboardType: TextInputType.name,
+                  validator: (value) {
+                    RegExp regex = new RegExp(r'^.{3,}$');
+                    if (value!.isEmpty) {
+                      return ("First Name cannot be Empty");
+                    }
+                    if (!regex.hasMatch(value)) {
+                      return ("Enter Valid name(Min. 3 Character)");
+                    }
+                    return null;
+                  },
+                  textInputAction: TextInputAction.next,
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.account_circle),
+                    contentPadding: const EdgeInsets.all(8),
+                    hintText: "First Name",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  )),
+
               const SizedBox(
                 height: 24,
               ),
-              TextFieldInput(
-                hint: 'Enter Your Email',
-                textType: TextInputType.emailAddress,
-                textController: _emailController,
-              ),
+              // TextFieldInput(
+              //   hint: 'Enter Your Email',
+              //   textType: TextInputType.emailAddress,
+              //   textController: _emailController,
+              // ),
+              TextFormField(
+                  autofocus: false,
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return ("Please Enter Your Email");
+                    }
+                    // reg expression for email validation
+                    if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                        .hasMatch(value)) {
+                      return ("Please Enter a valid email");
+                    }
+                    return null;
+                  },
+                  textInputAction: TextInputAction.next,
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.mail),
+                    contentPadding: const EdgeInsets.all(8),
+                    hintText: "Email",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  )),
               const SizedBox(
                 height: 24,
               ),
-              TextFieldInput(
-                hint: 'Enter Your Password',
-                textType: TextInputType.text,
-                textController: _passwordController,
-                isPass: true,
-              ),
+              // TextFieldInput(
+              //   hint: 'Enter Your Password',
+              //   textType: TextInputType.text,
+              //   textController: _passwordController,
+              //   isPass: true,
+              // ),
+              // const SizedBox(
+              //   height: 24,
+              // ),
+              // TextFieldInput(
+              //   hint: 'Enter Your Password Again',
+              //   textType: TextInputType.text,
+              //   textController: _bioController,
+              // ),
+              //password field
+              TextFormField(
+                  autofocus: false,
+                  controller: _passwordController,
+                  obscureText: true,
+                  validator: (value) {
+                    RegExp regex = new RegExp(r'^.{6,}$');
+                    if (value!.isEmpty) {
+                      return ("Password is required for login");
+                    }
+                    if (!regex.hasMatch(value)) {
+                      return ("Enter Valid Password(Min. 6 Character)");
+                    }
+                  },
+                  onSaved: (value) {
+                    _usernameController.text = value!;
+                  },
+                  textInputAction: TextInputAction.next,
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.vpn_key),
+                    contentPadding: const EdgeInsets.all(8),
+                    hintText: "Password",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  )),
               const SizedBox(
                 height: 24,
               ),
-              TextFieldInput(
-                hint: 'Enter Your Password Again',
-                textType: TextInputType.text,
-                textController: _bioController,
-              ),
+              //confirm password field
+              TextFormField(
+                  autofocus: false,
+                  controller: _confirmPasswordEditingController,
+                  obscureText: true,
+                  validator: (value) {
+                    if (_confirmPasswordEditingController.text !=
+                        _passwordController.text) {
+                      return "Password don't match";
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _confirmPasswordEditingController.text = value!;
+                  },
+                  textInputAction: TextInputAction.done,
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.vpn_key),
+                    contentPadding: const EdgeInsets.all(8),
+                    hintText: "Confirm Password",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  )),
+
               const SizedBox(
                 height: 24,
               ),
-              TextFieldInput(
-                hint: 'Enter Your Bio',
-                textType: TextInputType.text,
-                textController: _bioController,
-              ),
+              // TextFieldInput(
+              //   hint: 'Enter Your Bio',
+              //   textType: TextInputType.text,
+              //   textController: _bioController,
+              // ),
+              TextFormField(
+                  autofocus: false,
+                  controller: _bioController,
+                  keyboardType: TextInputType.multiline,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return ("Bios cannot be Empty");
+                    }
+                    return null;
+                  },
+                  textInputAction: TextInputAction.next,
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.account_circle),
+                    contentPadding: const EdgeInsets.all(8),
+                    hintText: "Tell me about your self",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  )),
               const SizedBox(
                 height: 24,
               ),

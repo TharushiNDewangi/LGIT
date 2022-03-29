@@ -8,6 +8,7 @@ class TextFieldInput extends StatelessWidget {
   final TextEditingController textController;
   final TextInputType textType;
   final String hint;
+
   //used for check pw or not
   final bool isPass;
 
@@ -31,10 +32,13 @@ class TextFieldInput extends StatelessWidget {
       obscureText: isPass,
       decoration: InputDecoration(
         hintText: hint,
-        border: inputBorder,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
         focusedBorder: inputBorder,
         enabledBorder: inputBorder,
         filled: true,
+        //prefixIcon: Icon(Icons.account_circle),
         contentPadding: const EdgeInsets.all(8),
       ),
     );

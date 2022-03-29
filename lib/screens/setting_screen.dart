@@ -33,6 +33,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
   final currentUser = FirebaseAuth.instance.currentUser;
   final newPasswordController = TextEditingController();
+  final confirmNewPasswordController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -250,9 +251,9 @@ class _SettingScreenState extends State<SettingScreen> {
             const SizedBox(
               height: 10,
             ),
-            buildNotificationOptionRow("Enable Notification", false),
-            buildNotificationOptionRow("Enable New Courses", false),
-            buildNotificationOptionRow("Enable To Use As Private", false),
+            notificationTab("Enable Notification", false),
+            notificationTab("Enable New Courses", false),
+            notificationTab("Enable To Use As Private", false),
             const SizedBox(
               height: 50,
             ),
@@ -273,7 +274,7 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 
-  Row buildNotificationOptionRow(String title, bool isActive) {
+  Row notificationTab(String title, bool isActive) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -372,6 +373,25 @@ class _SettingScreenState extends State<SettingScreen> {
                               TextStyle(color: Colors.redAccent, fontSize: 15),
                         ),
                         controller: newPasswordController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please Enter Password';
+                          }
+                          return null;
+                        },
+                      ),
+                      TextFormField(
+                        autofocus: false,
+                        obscureText: true,
+                        decoration: const InputDecoration(
+                          labelText: 'Enter Your Password Again: ',
+                          hintText: 'Enter Your Password Again',
+                          labelStyle: TextStyle(fontSize: 20.0),
+                          border: OutlineInputBorder(),
+                          errorStyle:
+                              TextStyle(color: Colors.redAccent, fontSize: 15),
+                        ),
+                        controller: confirmNewPasswordController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please Enter Password';
