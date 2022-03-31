@@ -50,7 +50,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       userData = snap.data()!;
       followers = snap.data()!['followers'].length;
       following = snap.data()!['following'].length;
-      /**For follow user 
+      /**From Tutorial
+       * For follow user 
        * 1st define bool variable and set it into false(bool isFollowing)
        * then call snap (user snap)and add current user uid to the
        * followers array in users database using .contains()
@@ -58,7 +59,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       isFollowing = snap
           .data()!['followers']
           .contains(FirebaseAuth.instance.currentUser!.uid);
-      // setState(() {});
     } catch (e) {
       print(e);
     }
@@ -194,6 +194,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     )
                         ],
                       ),
+
                       //const Divider(),
                       const SizedBox(height: 14),
                       const Text('About',
@@ -201,7 +202,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Center(
                           child: Text(
                         userData['bio'],
-                        style: const TextStyle(color: Colors.grey),
+                        style:
+                            const TextStyle(color: Colors.grey, fontSize: 15),
                       ))
                     ],
                   ),

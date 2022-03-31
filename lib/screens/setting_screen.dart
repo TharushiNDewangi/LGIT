@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:learn_git/screens/login_screen.dart';
+import 'package:learn_git/screens/splash.dart';
 import 'package:learn_git/services/auth_service.dart';
 import 'package:learn_git/services/firestore_service.dart';
 import 'package:learn_git/utill/colors.dart';
@@ -92,6 +93,32 @@ class _SettingScreenState extends State<SettingScreen> {
           backgroundColor: yellowColor,
           content: Text(
             'Your Password has been Successfully Changed. Login again !',
+            style: TextStyle(fontSize: 18.0),
+          ),
+        ),
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  deleteProfile() async {
+    try {
+      print('DEWWWWWWWWWWWWWWWWWW');
+      String res = await FireStoreService()
+          .deleteProfile(FirebaseAuth.instance.currentUser!.uid);
+      print("FirebaseAuth.instance.currentUser!.uid 1");
+      print(FirebaseAuth.instance.currentUser!.uid);
+      print("FirebaseAuth.instance.currentUser!.uid 11");
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const Splash()),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: yellowColor,
+          content: Text(
+            'Your Account has been Successfully deleted. SignUp again !',
             style: TextStyle(fontSize: 18.0),
           ),
         ),
@@ -194,7 +221,7 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
             changePasswordAlert(context, "Change password"),
             updateUserAccountAlert(context, "Update user account"),
-            deactivateAccountAlert(context, "Deactivate"),
+            deactivateAccountAlert(context, "Delete Account"),
             imageUpdateAlert(context, "Update image"),
             PrivacyAlert(context, "Privacy and security"),
             const SizedBox(
@@ -303,12 +330,12 @@ class _SettingScreenState extends State<SettingScreen> {
                 title: Text(title),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text(
+                  children: const [
+                    Text(
                         "If your mobile app collects personal information from your users, you need a Privacy Policy to comply with legislation around the world.Not only this, but app stores such as Google Play and Apple's App Store are now insistent on developers including Privacy Policies in their app store listings as well as within their apps."),
-                    const Text(
+                    Text(
                         "Having a Privacy Policy is also good practice for transparency and to show your customers that you care about keeping their personal data safe and secure. When you update your Privacy Policy with material changes, you can send Update Notices to be even more transparent and compliant."),
-                    const Text(
+                    Text(
                         "When you request permission to use personal data for somethingAccount sign-up and login pagesCheckout or payment pages"),
                   ],
                 ),
@@ -768,7 +795,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             setState(() {
                               newPassword = newPasswordController.text;
                             });
-                            changePassword();
+                            deleteProfile();
                           }
                         },
                         child: const Text(
