@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:learn_git/pages/home.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+import 'home.dart';
 
+/*Created by - IT19246024 - Warnakulasuriya D.A*/
+class MainHome extends StatefulWidget {
+  const MainHome({Key? key}) : super(key: key);
+
+  @override
+  State<MainHome> createState() => _MainHomeState();
+}
+
+class _MainHomeState extends State<MainHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,7 +77,7 @@ class HomeScreen extends StatelessWidget {
                         color: Colors.white,
                       ),
                       child: Image.network(
-                          "https://question2answers.com/wp-content/uploads/2020/04/9.jpg"),
+                          "https://www.worcesternews.co.uk/resources/images/4044885/"),
                     ),
                   ),
                   Container(
