@@ -39,6 +39,7 @@ class BlogService {
     return res;
   }
 
+/*Learn from a tutorial - this method will get all the blogs from the firebase. */
   Future getBlogs() async {
     try {
       await _firestore.collection("blogs").get().then((quertSnapshot) {

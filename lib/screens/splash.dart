@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:learn_git/pages/main_home.dart';
+import 'package:learn_git/screens/main_home.dart';
 
 import '../utill/colors.dart';
 import 'login_screen.dart';
