@@ -41,14 +41,20 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          width: 100,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Image.network(
+                              "https://play-lh.googleusercontent.com/36szRvmqeewn6fxpx9V88zhpPU3c84Im9zjAFPZl-cReiztnAD6cn0jSnWBGsNNdPsU"),
+                        ),
                       ),
-                      child: Image.network(
-                          "https://play-lh.googleusercontent.com/36szRvmqeewn6fxpx9V88zhpPU3c84Im9zjAFPZl-cReiztnAD6cn0jSnWBGsNNdPsU"),
                     ),
                   ],
                 ),
@@ -62,15 +68,18 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 30, 0),
-                    child: Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        // borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          // borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                        ),
+                        child: Image.network(
+                            "https://question2answers.com/wp-content/uploads/2020/04/9.jpg"),
                       ),
-                      child: Image.network(
-                          "https://question2answers.com/wp-content/uploads/2020/04/9.jpg"),
                     ),
                   ),
                   Container(
