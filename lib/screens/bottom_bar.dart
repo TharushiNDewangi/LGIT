@@ -18,8 +18,11 @@ class BottomBar extends StatefulWidget {
 }
 
 class _BottomBarState extends State<BottomBar> {
+  /**From Tutorial : initialized to home screen give o to page
+   * We can go through bottom barv that using numbers(0,1,2,3,4 like that)
+   * these related screens impemented in global_variable in dart file **/
   int _page = 0;
-  late PageController pageController; // for tabs animation
+  late PageController pageController; // for go throuhg tabs
   String username = "";
 
   @override
@@ -71,7 +74,7 @@ class _BottomBarState extends State<BottomBar> {
   }
 
   void navigationTap(int page) {
-    //Animating Page
+    //For go throuh the pages
     pageController.jumpToPage(page);
   }
 

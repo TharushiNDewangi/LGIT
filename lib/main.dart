@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'LGIT',
         theme: ThemeData.dark().copyWith(
           scaffoldBackgroundColor: blackColor,
         ),

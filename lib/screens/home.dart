@@ -45,17 +45,21 @@ class _HomeState extends State<Home> {
               ))
         ],
       ),
+      //Learn from a tutorial - the stream bulder widget will build itself on the latest snapshot of the firebase databse.
       body: StreamBuilder(
         stream: _firebase,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          //if the latest snapshot has error this will indicates that somthing is wrong
           if (snapshot.hasError) {
             return Text("something is wrong");
           }
+          //when the data is loading this will display circular progress indicator
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: CircularProgressIndicator(),
             );
           }
+          //This will return the data fetch from the database and display it as a list
           return Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),

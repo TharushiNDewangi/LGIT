@@ -133,8 +133,8 @@ class AuthService {
   //     //     EmailAuthProvider.getCredential(email: email, password: password);
   //     print(cUser);
   //     //AuthResult result = await cUser.reauthenticateWithCredential(credentials);
-  //     await DatabaseService(uid: result.user.uid).deleteuser(); // called from database class
-  //     await result.user.delete();
+  //     await _firestore.deleteProfile(uid: .user.uid).deleteuser(); // called from database class
+  //     //await result.user.delete();
   //     return true;
   //   } catch (e) {
   //     print(e.toString());

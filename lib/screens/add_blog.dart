@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../services/blog_service.dart';
 import '../util/add_image.dart';
+import 'home.dart';
 
 /*Created by - IT19246024 - Warnakulasuriya D.A*/
 class AddBlog extends StatefulWidget {
@@ -52,14 +53,6 @@ class _AddBlogState extends State<AddBlog> {
         ),
         backgroundColor: Colors.transparent,
         elevation: 0.5,
-        actions: [
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.article_outlined,
-                color: Colors.amber,
-              ))
-        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -130,9 +123,17 @@ class _AddBlogState extends State<AddBlog> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      blogService.addBlog(authNameController.text,
-                          titleController.text, descController.text, _image!);
-                      Navigator.pop(context);
+                      blogService
+                          .addBlog(
+                              authNameController.text,
+                              titleController.text,
+                              descController.text,
+                              _image!)
+                          .whenComplete(() {
+                        Navigator.pushReplacement(
+                            context, MaterialPageRoute(builder: (_) => Home()));
+                      });
+                      // Navigator.pop(context);
                     },
                     child: const Text('Upload Post'),
                     style: btnstyle,

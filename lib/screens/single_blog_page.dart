@@ -59,14 +59,6 @@ class _SingleBlogPageState extends State<SingleBlogPage> {
         ),
         backgroundColor: Colors.transparent,
         elevation: 0.5,
-        actions: [
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.article_outlined,
-                color: Colors.amber,
-              )),
-        ],
       ),
       body: SingleChildScrollView(
         child: Column(
