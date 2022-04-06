@@ -3,6 +3,7 @@ import 'package:learn_git/screens/home.dart';
 
 import 'package:learn_git/screens/questionlist.dart';
 
+/*Created by - IT19246024 - Warnakulasuriya D.A*/
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -46,15 +47,12 @@ class HomeScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
-
-
                         onTap: () {
                           // Navigator.push(
                           //     context,
                           //     MaterialPageRoute(
                           //         builder: (context) => const NoteList()));
                         },
-
                         child: Container(
                           width: 100,
                           height: 100,
@@ -79,14 +77,12 @@ class HomeScreen extends StatelessWidget {
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 30, 0),
                     child: GestureDetector(
-
                       onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const QuestionList()));
                       },
-
                       child: Container(
                         width: 100,
                         height: 100,
