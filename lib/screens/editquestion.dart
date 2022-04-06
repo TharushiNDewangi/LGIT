@@ -26,13 +26,17 @@ class _EditQuestionState extends State<EditQuestion> {
 
   Uint8List? _image;
   late String imgUrl;
+  late String postId = "";
 
   @override
   void initState() {
     //the question and content will save in  the specific variable
+    postId = widget.documentid.get('id');
     question = TextEditingController(text: widget.documentid.get('question'));
     content = TextEditingController(text: widget.documentid.get('content'));
     imgUrl = widget.documentid.get('blogPicUrl');
+    print("postId9999999999999999999999");
+    print(postId);
     super.initState();
   }
 
@@ -52,114 +56,108 @@ class _EditQuestionState extends State<EditQuestion> {
         backgroundColor: Colors.transparent,
         elevation: 0.5,
       ),
-      body: Column(
-        children: [
-          Container(),
-          Form(
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-              child: Container(
-                child: Column(
-                  children: [
-                    Center(
-                        child: Image.network(imgUrl,
-                            fit: BoxFit.fitHeight, height: 180, width: 80)),
-                    Padding(
-                      child: Text("Question:"),
-                      padding: EdgeInsets.fromLTRB(0, 2, 260, 2),
-                    ),
-                    Container(
-                      margin: EdgeInsets.symmetric(vertical: 10.0),
-                      child: TextField(
-                        controller: question,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          errorStyle:
-                              TextStyle(color: Colors.redAccent, fontSize: 15),
-                          hintText: 'question',
+      body: Scrollbar(
+        child: Column(
+          children: [
+            Container(),
+            Form(
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                child: Container(
+                  child: Column(
+                    children: [
+                      Center(
+                          child: Image.network(imgUrl,
+                              fit: BoxFit.fitHeight, height: 100, width: 80)),
+                      const Padding(
+                        //child: Text("Question:"),
+                        padding: EdgeInsets.fromLTRB(0, 2, 200, 2),
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: 8.0),
+                        child: TextField(
+                          controller: question,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            errorStyle: TextStyle(
+                                color: Colors.redAccent, fontSize: 10),
+                            hintText: 'question',
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      child: Text("Content:"),
-                      padding: EdgeInsets.fromLTRB(0, 2, 220, 2),
-                    ),
-                    Container(
-                      margin: EdgeInsets.symmetric(vertical: 10.0),
-                      child: TextField(
-                        maxLines: 8,
-                        controller: content,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          errorStyle:
-                              TextStyle(color: Colors.redAccent, fontSize: 15),
-                          hintText: 'content',
+                      SizedBox(
+                        height: 10,
+                      ),
+                      const Padding(
+                        //child: Text("Content:"),
+                        padding: EdgeInsets.fromLTRB(0, 2, 110, 2),
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: 8.0),
+                        child: TextField(
+                          maxLines: 4,
+                          controller: content,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            errorStyle: TextStyle(
+                                color: Colors.redAccent, fontSize: 10),
+                            hintText: 'content',
+                          ),
                         ),
                       ),
-                    ),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              widget.documentid.reference.update({
-                                'question': question.text,
-                                'content': content.text,
-                              }).whenComplete(() {
-                                Navigator.pushReplacement(
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                widget.documentid.reference.update({
+                                  'question': question.text,
+                                  'content': content.text,
+                                }).whenComplete(() {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) => QuestionList()));
+                                });
+                              },
+                              icon: const Icon(Icons.update),
+                              color: Colors.red,
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                widget.documentid.reference
+                                    .delete()
+                                    .whenComplete(() {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) => QuestionList()));
+                                });
+                              },
+                              icon: const Icon(Icons.delete),
+                              color: Colors.red,
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (_) => QuestionList()));
-                              });
-                            },
-                            icon: const Icon(Icons.update),
-                            color: Colors.red,
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              widget.documentid.reference
-                                  .delete()
-                                  .whenComplete(() {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => QuestionList()));
-                              });
-                            },
-                            icon: const Icon(Icons.delete),
-                            color: Colors.red,
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
+                                        builder: (context) =>
+                                            AddAnswers(postId: postId)));
+                              },
+                              icon: const Icon(Icons.add),
+                              color: Colors.red,
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-      floatingActionButton: Container(
-        padding: const EdgeInsets.symmetric(vertical: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            FloatingActionButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AddAnswers()));
-              },
-              backgroundColor: const Color(0xFF1C7EE7),
-              child: const Icon(
-                Icons.mode_edit,
-              ),
-            )
+            const Divider(),
           ],
         ),
       ),
