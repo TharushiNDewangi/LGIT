@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:learn_git/pages/home.dart';
+import 'package:learn_git/screens/home.dart';
 
+import 'package:learn_git/screens/questionlist.dart';
+
+/*Created by - IT19246024 - Warnakulasuriya D.A*/
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -41,14 +44,25 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => const NoteList()));
+                        },
+                        child: Container(
+                          width: 100,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Image.network(
+                              "https://play-lh.googleusercontent.com/36szRvmqeewn6fxpx9V88zhpPU3c84Im9zjAFPZl-cReiztnAD6cn0jSnWBGsNNdPsU"),
+                        ),
                       ),
-                      child: Image.network(
-                          "https://play-lh.googleusercontent.com/36szRvmqeewn6fxpx9V88zhpPU3c84Im9zjAFPZl-cReiztnAD6cn0jSnWBGsNNdPsU"),
                     ),
                   ],
                 ),
@@ -62,15 +76,23 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 30, 0),
-                    child: Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        // borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const QuestionList()));
+                      },
+                      child: Container(
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          // borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                        ),
+                        child: Image.network(
+                            "https://question2answers.com/wp-content/uploads/2020/04/9.jpg"),
                       ),
-                      child: Image.network(
-                          "https://question2answers.com/wp-content/uploads/2020/04/9.jpg"),
                     ),
                   ),
                   Container(

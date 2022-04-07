@@ -22,6 +22,7 @@ class Blog {
         "blogPicUrl": blogPicUrl
       };
 
+  /*Learn from a tutorial - convert snapshot to blog model */
   Blog.fromSnapshot(snapshot)
       : id = snapshot.data()['id'],
         authorName = snapshot.data()['authorName'],
