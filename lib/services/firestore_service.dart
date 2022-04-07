@@ -93,6 +93,7 @@ class FireStoreService {
 // Future deleteuser() {
 //     return userCollection.document(uid).delete();
 //   }
+
   Future<String> deleteProfile(
     String uid,
     //{
@@ -108,15 +109,4 @@ class FireStoreService {
     return res;
   }
 
-  // Future<String> updateUserData(
-  //   //String uid,
-  //   //String email,
-  //   String username,
-  //   String bio,
-  // ) async {
-  //   await _firestore.collection('users').doc(uid).update({
-  //     'username': username,
-  //     'bio': bio,
-  //   });
-  // }
 }

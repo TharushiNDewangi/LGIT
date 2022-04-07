@@ -156,10 +156,7 @@ class _SettingScreenState extends State<SettingScreen> {
     print(_emailController.text);
     print("DEWWWWWWW");
 
-    // usersRef.document(widget.currentUserId).updateData({
-    //   "displayName": displayNameController.text,
-    //   "bio": bioController.text,
-    // });
+    
     SnackBar snackbar = SnackBar(content: Text("Profile updated!"));
   }
 
@@ -174,10 +171,7 @@ class _SettingScreenState extends State<SettingScreen> {
     print(_emailController.text);
     print("DEWWWWWWW");
 
-    // usersRef.document(widget.currentUserId).updateData({
-    //   "displayName": displayNameController.text,
-    //   "bio": bioController.text,
-    // });
+    
     SnackBar snackbar = SnackBar(content: Text("Profile Picture updated!"));
   }
 
@@ -219,6 +213,9 @@ class _SettingScreenState extends State<SettingScreen> {
             const SizedBox(
               height: 10,
             ),
+            /**Learn from tutorial */
+            /**In UI part i learn how to call method and display like this UI passing context and tile as parameters
+            */
             changePasswordAlert(context, "Change password"),
             updateUserAccountAlert(context, "Update user account"),
             deactivateAccountAlert(context, "Delete Account"),
@@ -388,21 +385,6 @@ class _SettingScreenState extends State<SettingScreen> {
                   key: _formKey,
                   child: ListView(
                     children: [
-                      // TextFieldInput(
-                      //   hint: 'Enter Your Password',
-                      //   textType: TextInputType.text,
-                      //   textController: _passwordController,
-                      //   isPass: true,
-                      // ),
-                      // const SizedBox(
-                      //   height: 24,
-                      // ),
-                      // TextFieldInput(
-                      //   hint: 'Enter Your Password Again',
-                      //   textType: TextInputType.text,
-                      //   textController: _bioController,
-                      // ),
-                      //password field
                       TextFormField(
                           autofocus: false,
                           controller: newPasswordController,

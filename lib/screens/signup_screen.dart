@@ -158,11 +158,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(
                 height: 24,
               ),
-              // TextFieldInput(
-              //   hint: 'Enter Your Email',
-              //   textType: TextInputType.emailAddress,
-              //   textController: _emailController,
-              // ),
+              
               TextFormField(
                   autofocus: false,
                   controller: _emailController,
@@ -190,20 +186,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(
                 height: 24,
               ),
-              // TextFieldInput(
-              //   hint: 'Enter Your Password',
-              //   textType: TextInputType.text,
-              //   textController: _passwordController,
-              //   isPass: true,
-              // ),
-              // const SizedBox(
-              //   height: 24,
-              // ),
-              // TextFieldInput(
-              //   hint: 'Enter Your Password Again',
-              //   textType: TextInputType.text,
-              //   textController: _bioController,
-              // ),
               //password field
               TextFormField(
                   autofocus: false,
@@ -258,11 +240,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(
                 height: 24,
               ),
-              // TextFieldInput(
-              //   hint: 'Enter Your Bio',
-              //   textType: TextInputType.text,
-              //   textController: _bioController,
-              // ),
+              
               TextFormField(
                   autofocus: false,
                   controller: _bioController,
@@ -285,14 +263,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(
                 height: 24,
               ),
-              // TextFieldInput(
-              //   hintText: 'Your GitHub Level',
-              //   textInputType: TextInputType.text,
-              //   textEditingController: _bioController,
-              // ),
-              // const SizedBox(
-              //   height: 24,
-              // ),
+              
               InkWell(
                 child: Container(
                   //From Tutorial check loading

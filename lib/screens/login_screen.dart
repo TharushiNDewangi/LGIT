@@ -58,9 +58,6 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(
         child: Container(
           padding:
-              //MediaQuery.of(context).size.width > webScreenSize
-              //? EdgeInsets.symmetric(
-              //horizontal: MediaQuery.of(context).size.width / 3)
               const EdgeInsets.symmetric(horizontal: 32),
           width: double.infinity,
           child: Column(
@@ -155,11 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         builder: (context) => const SignUpScreen(),
                       ),
                     ),
-                    // onTap: () => Navigator.of(context).push(
-                    //   MaterialPageRoute(
-                    //     builder: (context) => const MobileScreenLayout(),
-                    //   ),
-                    // ),
+                    
                     child: Container(
                       child: const Text(
                         ' Signup.',
