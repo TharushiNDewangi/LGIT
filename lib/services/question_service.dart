@@ -42,6 +42,9 @@ class QuestionService {
     return res;
   }
 
+/**
+ * Fetch all the questions from questions collection
+ */
   Future getQuestions() async {
     try {
       await _firestore.collection("questions").get().then((quertSnapshot) {
