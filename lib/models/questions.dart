@@ -22,7 +22,9 @@ class Question {
         "question": question,
         "content": content,
       };
-
+/**
+ * From Tutorial - convert snapshot to questions model
+ */
   Question.fromSnapshot(snapshot)
       : id = snapshot.data()['id'],
         question = snapshot.data()['question'],

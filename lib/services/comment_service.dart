@@ -9,23 +9,6 @@ class AnswerService {
   DocumentSnapshot? _lastDocument;
   List answerList = [];
 
-  // Future<String> addAnswers(String answer, String text) async {
-  //   String res = "Success";
-  //   String id = generateId();
-  //   try {
-  //     Map<String, dynamic> answers = {
-  //       "id": id,
-  //       "answer": answer,
-  //     };
-
-  //     await _firestore.collection("answers").doc(id).set(answers);
-  //   } catch (e) {
-  //     return e.toString();
-  //   }
-
-  //   return res;
-  // }
-
   Future getAnswers() async {
     try {
       await _firestore.collection("answers").get().then((quertSnapshot) {

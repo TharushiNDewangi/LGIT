@@ -10,6 +10,9 @@ class QuestionList extends StatefulWidget {
   State<QuestionList> createState() => _QuestionListState();
 }
 
+/**
+ * read all the current question of the document
+ */
 class _QuestionListState extends State<QuestionList> {
   final Stream<QuerySnapshot> _firebase =
       FirebaseFirestore.instance.collection('questions').snapshots();
@@ -38,12 +41,17 @@ class _QuestionListState extends State<QuestionList> {
               ))
         ],
       ),
+      /**
+       * Stream builder build the newst version of the firebase database it self
+       */
       body: StreamBuilder(
         stream: _firebase,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          //if the snapshot is give error it will shows an error msg
           if (snapshot.hasError) {
             return Text("something is wrong");
           }
+          //In here circularProgressIndicator shows when the data is loading
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: CircularProgressIndicator(),
@@ -64,6 +72,8 @@ class _QuestionListState extends State<QuestionList> {
                 itemCount: (snapshot.data! as dynamic).docs.length,
                 itemBuilder: (_, index) {
                   return InkWell(
+                    //On the onTap function when we click on a question it will navigate to edit page of perticular
+                    //  question
                     onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => EditQuestion(

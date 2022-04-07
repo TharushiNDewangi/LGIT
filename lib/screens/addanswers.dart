@@ -46,6 +46,7 @@ class _AddAnswerstate extends State<AddAnswers> {
 
     print(answerController.text);
     print(widget.postId);
+
     try {
       String res = await AnswerService().postComment(
         widget.postId,
@@ -61,7 +62,7 @@ class _AddAnswerstate extends State<AddAnswers> {
         answerController.text = "";
       });
     } catch (err) {
-      // print("dewwwwwww err");
+      // print("navaaaa err");
       print(err);
     }
   }
@@ -130,6 +131,7 @@ class _AddAnswerstate extends State<AddAnswers> {
                 ),
               ),
               InkWell(
+                //OnTap method will call the postComment
                 onTap: () => postComment(),
                 child: Container(
                   padding:

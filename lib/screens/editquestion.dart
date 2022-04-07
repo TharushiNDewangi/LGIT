@@ -107,6 +107,9 @@ class _EditQuestionState extends State<EditQuestion> {
                       ),
                       Container(
                         child: Row(
+                          /**
+                           * In here update method will update the title and content after updating it will navigate to Question list page
+                           */
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             IconButton(
@@ -125,6 +128,10 @@ class _EditQuestionState extends State<EditQuestion> {
                               color: Colors.red,
                             ),
                             IconButton(
+                              /**
+                               * When we press in delete icon button it will delete the question of perticular it and 
+                               * after deleting it will navigate to question list page
+                               */
                               onPressed: () {
                                 widget.documentid.reference
                                     .delete()
@@ -138,6 +145,12 @@ class _EditQuestionState extends State<EditQuestion> {
                               icon: const Icon(Icons.delete),
                               color: Colors.red,
                             ),
+                            /**
+                             * In here when we click on addButton it  will navigate to 
+                             * answers page of that perticular question 
+                             * We can post comments in here for that perticular question 
+                             * All the answers will display in a listview on the page
+                             */
                             IconButton(
                               onPressed: () {
                                 Navigator.push(
